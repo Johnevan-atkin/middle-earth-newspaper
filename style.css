@@ -1,0 +1,152 @@
+/* ============================================
+   Required: Root & Grid Setup (already passing tests)
+   ============================================ */
+html {
+  font-size: 16px; /* base for rem/em – you can change to 18px or 20px later */
+}
+
+.newspaper-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto 1fr 1fr 1fr;
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #f9f5eb url('https://www.transparenttextures.com/patterns/cream-paper.png') repeat;
+  border: 1px solid #d4b37e;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  font-family: 'Georgia', serif;
+  color: #2c1b0f;
+  animation: fadeIn 1.2s ease-out;
+}
+
+/* Grid areas – required */
+.title            { grid-area: title; }
+.feature-article  { grid-area: feature-article; }
+.secondary-article{ grid-area: secondary-article; }
+.cover-image      { grid-area: cover-image; }
+.small-article1   { grid-area: small-article1; }
+.small-article2   { grid-area: small-article2; }
+.small-article3   { grid-area: small-article3; }
+
+.newspaper-layout {
+  grid-template-areas:
+    "title            title            title"
+    "feature-article  feature-article  cover-image"
+    "secondary-article secondary-article cover-image"
+    "small-article1   small-article2   small-article3";
+}
+
+/* Required image fit */
+.cover-image img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* ============================================
+   Amped-Up Typography & Styling
+   ============================================ */
+.title h1 {
+  font-family: 'Cinzel', serif; /* or 'Playfair Display' */
+  font-size: 4.5rem;
+  text-align: center;
+  color: #4a2c0b;
+  margin: 0.5rem 0;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  letter-spacing: 1px;
+}
+
+.feature-article h2,
+.secondary-article h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 2.8rem;
+  color: #6b3e1e;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #d4b37e;
+  padding-bottom: 0.5rem;
+}
+
+.feature-article p,
+.secondary-article p,
+.small-article1 p,
+.small-article2 p,
+.small-article3 p {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  margin: 0 0 1.5rem;
+}
+
+.small-article1 h3,
+.small-article2 h3,
+.small-article3 h3 {
+  font-size: 1.8rem;
+  color: #8b5a2b;
+  margin-bottom: 0.75rem;
+}
+
+/* Drop cap on first paragraph of each article */
+.feature-article p:first-of-type::first-letter,
+.secondary-article p:first-of-type::first-letter,
+.small-article1 p:first-of-type::first-letter,
+.small-article2 p:first-of-type::first-letter,
+.small-article3 p:first-of-type::first-letter {
+  float: left;
+  font-size: 4rem;
+  line-height: 0.8;
+  font-family: 'Cinzel', serif;
+  color: #8b4513;
+  margin: 0 0.5rem 0 0;
+  font-weight: bold;
+}
+
+/* Hover lift on articles */
+article {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 1.5rem;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+article:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+}
+
+/* Cover image hover zoom */
+.cover-image {
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.cover-image img {
+  transition: transform 0.4s ease;
+}
+
+.cover-image:hover img {
+  transform: scale(1.08);
+}
+
+/* Fade-in animation on load */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive tweaks (already required, but polished) */
+@media (max-width: 900px) {
+  .newspaper-layout {
+    grid-template-areas:
+      "title          title          title"
+      "feature-article feature-article feature-article"
+      "cover-image    cover-image    cover-image"
+      "secondary-article secondary-article secondary-article"
+      "small-article1 small-article2 small-article3";
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+}
